@@ -1,0 +1,12 @@
+#!/bin/sh
+
+if [[ -z $(pidof base_master) ]]; then
+	/usr/sbin/set_base_master
+	base_master
+fi
+
+sleep 30
+if [[ -z $(pidof base_master) ]]; then
+	/usr/sbin/set_base_master
+	base_master
+fi

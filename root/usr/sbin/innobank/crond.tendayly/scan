@@ -1,0 +1,4 @@
+#!/bin/sh
+
+sleep 100
+echo 1 > /mnt/sd/scan_info/scan_flag

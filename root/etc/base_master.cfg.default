@@ -1,0 +1,123 @@
+sensorname="sensor"
+# 用来获取mac地址的网卡名称
+dev_iface="eth0"
+# mosquitto 服务器地址
+hostip="58.59.6.130"
+#hostip="60.205.92.158"
+# mosquitto 服务器端口
+hostport="1883"
+# TCP 接收基带板信息的端口号
+port="3345"
+# TCP recv bind ip addr
+host="127.0.0.1"
+# UDP报文发送IP 和 端口号
+uhost="192.168.2.11"
+uport="3346"
+# provide user name
+user_name="amywifi"
+# provide user password
+user_passwd="123456.."
+
+# 功放信息上报周期时间
+sendpa_itv="1800"
+# 检测基带设备在线信息时间
+bandonline_itv="30"
+# 采集用户信息最大占json条目数量
+max_stacache="100"
+# get config itv
+getcfgitv="300"
+# keep alive
+keepalive="10"
+# timer error timeout
+timererr="10"
+# check baseband online status timeout
+baseband_itv="600"
+# 发送基带设备信息的超时时间
+banditv="60"
+# 发送用户信息超时时间
+sendsta_itv="30"
+# http 发送超时时间
+httptimeout="3"
+# 发送主控板信息的超时时间
+statitv="30"
+
+# 默认频段模式 1--同频 2--异频 
+band_typ="1"
+
+# config files
+config="/etc/base_master.cfg"
+# 保存IMSI信息的数据库文件保存路径
+dbpath="/mnt/sd/imsi_info/"
+# 保存基带板信息的文件保存路径(文件名为对应的IP地址)
+bsavepath="/mnt/sd/base_band/"
+# 保存同频异频配置信息数据库文件
+band_pa_state_config="/mnt/sd/band_pa_state.db"
+# 主控板动态参数保存文件
+runinfo_file="/etc/master_run"
+# 采集数据缓存文件名
+cachefile="/root/cache_file"
+# 缓存文件缓存条数(4/M)
+max_filecache="1600"
+# 保存数据的数据表名称
+sqltablename="imsi_info"
+# 保存动态默认配置的文件夹
+def_basepath="/mnt/sd/config/"
+
+
+# 发送各类型信息的URL地址
+#url="http://60.205.92.158/dm_baicells/index.php/Webservice/V100"
+url="http://58.59.6.130:28080/index.php/Webservice/V100"
+
+# 发送主控板信息 api
+stat_api="controller_save"
+# 发送小区状态信息 api
+cellstat_api="work_admin_state_save"
+# 发送基站设备信息 api
+baseband_api="basestation_save"
+# 发送用户信息 api
+station_api="client_save"
+# 发送频点设置参数信息 api
+brand_api="brand_save"
+# 发送扫频信息 api
+rem_result_api="rem_result_save"
+# 发送系统扫频信息 api
+sysarfcn_api="sys_arfcn_save"
+# 发送黑名单信息 api
+black_list_api="black_list_save"
+# TDD子帧信息上报 api
+tddsubframe_api="tdd_subframe_save"
+# 发送同步信息 api
+sync_api="sync_save"
+# 发送重定向状态 api
+redirect_api="redirect_save"
+# 发送UE状态 api
+uesend_api="ue_save"
+# 发送告警信息 api
+warning_api="device_alarm_save"
+# 发送增益与发射功率 api
+rx_power_api="rxgain_powerderease_save"
+# 位置区更新拒绝原因 api
+rejectcause_api="tau_reject_cause_save"
+# 随机接入成功率上报 api
+rrcconnum_api="rrc_connect_num_save"
+# 频点自配置后台频点上传 api
+selfcfg_api="selfcfg_arfcn_save"
+# 发送GPS经纬度高度 api
+post_gps_api="gpsinfo_save"
+# GPS偏移量查询 api
+gpsppsls_api="gps_ppsls_save"
+# plmn辅频信息上传 api
+plmninfo_api="plmninfo_save"
+# 功放信息上传 api
+painfo_api="painfo_save"
+# 同频异频状态上传 api
+same_dif_fre_api="device_bandtype_save"
+# get wips config api
+wips_api="api/sensor_wips_config"
+# get generic config api
+generic_api="api/sensor_config"
+
+
+
+# debug
+debug="1"

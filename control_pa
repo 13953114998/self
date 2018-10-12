@@ -1,0 +1,91 @@
+# 7频功放GPIO控制
+# 功放电平控制GPIO 0-低电平  1-高电平  
+# PIN 1    |功放开关                 |低电平 - 开           高电平 - 关
+# PIN 2    |TDD/FDD切换              |低电平 - FDD          高电平 - TDD
+# PIN 3    |Band39/(Band38/40) 切换  |低电平 -（Band38/40） 高电平 - Band39
+# PIN 4    |Band38/Band40 切换       |低电平 - Band38       高电平 - Band40
+# PIN 5|6  |Band1/Band3   切换       |低低 - Band8   高低 - Band5   低高 - Band1  高高 - Band3
+# PIN 7    |GND
+# PIN 8    |TDD收发同步              |低 - PA开启，LNA关闭， 高 - PA关闭，LNA开启
+
+#!/bin/sh
+
+# GPIO PIN 2 4 6 8 10 12 14 16 18
+# PIN 2 18  GND
+
+# PIN 2
+GPIO_MOD_SWITCH=/sys/class/leds/e600g:green:led4/brightness
+# PIN 3
+GPIO_TDDBAND89_SWITCH=/sys/class/leds/e600g:green:led6/brightness
+# PIN 4
+GPIO_TDDBAND80_SWITCH=/sys/class/leds/e600g:green:led8/brightness
+# PIN 5
+GPIO_FDD58_SWITCH=/sys/class/leds/e600g:green:led10/brightness
+# PIN 6
+GPIO_FDD13_SWITCH=/sys/class/leds/e600g:green:led12/brightness
+
+echo "$1"
+
+turn_hi=1
+turn_lo=0
+
+cmd_B1=1    # FDD Band 1
+cmd_B3=3    # FDD Band 3
+cmd_B5=5    # FDD Band 5
+cmd_B8=8    # FDD Band 8
+cmd_B38=38   # TDD Band 38
+cmd_B39=39   # TDD Band 39
+cmd_B40=40   # TDD Band 40
+cmd_OFF=0   # Turn OFF PA device
+
+if [[ "$1" == "$cmd_B1" ]]; then
+echo "set B1"
+	echo $turn_lo > $GPIO_MOD_SWITCH          # 0 拉低 切换成FDD
+	echo $turn_hi > $GPIO_TDDBAND89_SWITCH    # 1 拉高
+	echo $turn_hi > $GPIO_TDDBAND80_SWITCH    # 1 拉高
+	echo $turn_lo > $GPIO_FDD58_SWITCH        # 0 拉低 设置Band1
+	echo $turn_hi > $GPIO_FDD13_SWITCH        # 1 拉高 设置Band1
+elif [[ "$1" == "$cmd_B3" ]]; then
+echo "set B3"
+	echo $turn_lo > $GPIO_MOD_SWITCH          # 0 拉低 切换成FDD
+	echo $turn_hi > $GPIO_TDDBAND89_SWITCH    # 1 拉高
+	echo $turn_hi > $GPIO_TDDBAND80_SWITCH    # 1 拉高
+	echo $turn_hi > $GPIO_FDD58_SWITCH        # 1 拉高 设置Band3
+	echo $turn_hi > $GPIO_FDD13_SWITCH        # 1 拉高 设置Band3
+elif [[ "$1" == "$cmd_B5" ]]; then
+echo "set B5"
+	echo $turn_lo > $GPIO_MOD_SWITCH          # 0 拉低 切换成FDD
+	echo $turn_hi > $GPIO_TDDBAND89_SWITCH    # 1 拉高
+	echo $turn_hi > $GPIO_TDDBAND80_SWITCH    # 1 拉高
+	echo $turn_hi > $GPIO_FDD58_SWITCH        # 1 拉高 设置Band5
+	echo $turn_lo > $GPIO_FDD13_SWITCH        # 0 拉低 设置Band5
+elif [[ "$1" == "$cmd_B8" ]]; then
+echo "set B8"
+	echo $turn_lo > $GPIO_MOD_SWITCH          # 0 拉低 切换成FDD
+	echo $turn_hi > $GPIO_TDDBAND89_SWITCH    # 1 拉高
+	echo $turn_hi > $GPIO_TDDBAND80_SWITCH    # 1 拉高
+	echo $turn_lo > $GPIO_FDD58_SWITCH        # 0 拉低 设置Band8
+	echo $turn_lo > $GPIO_FDD13_SWITCH        # 0 拉低 设置Band8
+elif [[ "$1" == "$cmd_B38" ]]; then
+echo "set B38"
+	echo $turn_hi > $GPIO_MOD_SWITCH          # 1 拉高 切换成TDD
+	echo $turn_lo > $GPIO_TDDBAND89_SWITCH    # 0 拉低 设置Band38/40
+	echo $turn_lo > $GPIO_TDDBAND80_SWITCH    # 0 拉低 设置Band38
+	echo $turn_hi > $GPIO_FDD58_SWITCH        # 1 拉高
+	echo $turn_hi > $GPIO_FDD13_SWITCH        # 1 拉高
+elif [[ "$1" == "$cmd_B39" ]]; then
+echo "set B39"
+	echo $turn_hi > $GPIO_MOD_SWITCH          # 1 拉高 切换成TDD
+	echo $turn_hi > $GPIO_TDDBAND89_SWITCH    # 1 拉高 设置Band39
+	echo $turn_hi > $GPIO_TDDBAND80_SWITCH    # 1 拉高
+	echo $turn_hi > $GPIO_FDD58_SWITCH        # 1 拉高
+	echo $turn_hi > $GPIO_FDD13_SWITCH        # 1 拉高
+elif [[ "$1" == "$cmd_B40" ]]; then
+echo "set B40"
+	echo $turn_hi > $GPIO_MOD_SWITCH          # 1 拉高 切换成TDD
+	echo $turn_lo > $GPIO_TDDBAND89_SWITCH    # 0 拉低 设置Band38/40
+	echo $turn_hi > $GPIO_TDDBAND80_SWITCH    # 1 拉高 设置Band40
+	echo $turn_hi > $GPIO_FDD58_SWITCH        # 1 拉高
+	echo $turn_hi > $GPIO_FDD13_SWITCH        # 1 拉高
+fi
+

@@ -1,0 +1,60 @@
+package "base_master"
+version "1.0.0"
+
+args "--conf-parser"
+option "config" 		f 	"config files" 			string	default="/etc/basemaster.cfg" 		optional
+option "band_pa_state_config"   -   "同频异频配置数据库文件"   		string  default="/mnt/sd/band_pa_state.db"     	optional
+
+# pa company
+option "pa_cmp"                 -       "PA dev company 0-ShengH,1-LinE" int           default="0"                              optional
+option "bc_proto"               -       "Protocol of baicell 0-UDP,1-TCP" int          default="1"                              optional
+
+# TCP 
+option "host" 			- 	"TCP recv bind ip addr" 	string		default="127.0.0.1"			optional
+option "port"			- 	"TCP recv baicell bind port" 	int		default="3345"				optional
+# UDP 将接收到的数据使用UDP发送至本地端口
+option "uhost" 			- 	"UDP send dts host ip" 		string		default="127.0.0.1"			optional
+option "uport" 			- 	"UDP send dts port" 		int		default="3346"				optional
+
+option "uehost" 		- 	"UDP send UE info dts host ip" 	string		default="127.0.0.1"			optional
+option "ueport" 		- 	"UDP send UE info dts port" 	int		default="3355"				optional
+
+#band type
+option "band_typ" 		- 	"默认频段模式 1--同频 2--异频" 	int		default="1"				optional
+option "runinfo_file"           -       "主控板动态参数保存文件"        string          default="/etc/master_run"               optional
+
+#tcp state
+option "tcp_state"  -   "1 启动服务端 0启动客户端"  int       default="1"         optional
+option "tcp_ip"     -   "tcp交互ip"                 string    default="11.11.11.11" optional
+option "tcp_port"   -   "tcp交互端口"               int       default="5050"      optional
+option "operator"   -   "运营商状态 1为移动 2为联通 3为电信(服务端默认为电信,不检查此选项)"   int   default="1"   optional
+
+
+# time (单位:秒(s))
+option "sendpa_itv" 		- 	"功放信息上报周期时间"		 int		default="1800" 			optional
+option "sendsta_itv" 		- 	"采集用户信息发送间隔时间"	 int		default="10" 			optional
+option "bandonline_itv" 	- 	"检测基带设备在线信息时间"	 int		default="120" 			optional
+option "max_stacache" 		- 	"采集用户信息最大占json条目数量" int		default="100" 			optional
+
+option "getcfgitv" 		- 	"get config itv" 		 int		default="300"			optional
+option "keepalive" 		k 	"keep alive" 			 int		default="10"			optional
+option "timererr" 		- 	"timer error timeout" 		 int 		default="10" 			optional
+option "baseband_itv" 		- 	"check baseband online status timeout" 	int 	default="600"			optional
+
+option "cutnet_mode" 		- 	"断网同异频模式 1：同频2：异频A3：异频B" int  	default="2" 			optional
+option "cutnet_power" 		- 	"发射功率(衰减值 0x00~0xff)" 		 int 	default="16" 			optional
+option "cutnet_rxgain" 		- 	"接收增益配置(0~127)" 			 int	default="20" 			optional
+
+# save recev information (IMSI ...) to sqlite
+option "dbpath" 		- 	"保存数据的数据库所在位置(绝对路径)" 	string		default="/mnt/sd/imsi_info/" 		optional
+option "sqltablename" 		- 	"保存数据的数据表名称" 			string		default="imsi_info" 			optional
+option "bsavepath" 		- 	"保存基带板信息的路径"			string		default="/mnt/sd/base_band/" 		optional
+option "def_basepath"           -       "保存动态默认配置的路径"                string  	default="/mnt/sd/config/" 		optional
+option "log_dir" 	        -   	"操作日志保存路径" 	 		string    	default="/mnt/sd/log/"			optional
+
+option "recev_type" 		r 	"recev_imsi_udp type 0 imsi, 1 wifi, 2 UE," 	int		default="0" 			optional
+
+# other
+option "curldebug" 		- 	"curl debug" 			flag		off
+option "debug"  		d 	"debug" 			int		default="1" 		optional
+

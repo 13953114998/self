@@ -1,0 +1,6 @@
+menu "base_master Features"
+	depends on PACKAGE_base_master
+config BIG_END
+	bool "base_master work in Big endain device (eg:MIPS, ARM)"
+	default n
+endmenu

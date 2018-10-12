@@ -1,7 +1,7 @@
 #ifndef __CONFIG_H__
 #define __CONFIG_H__
-#define DEBUG
-/* #undef BIG_END */
+#cmakedefine DEBUG
+#cmakedefine BIG_END 
 
 typedef unsigned char 	   U8;
 typedef unsigned short int U16;

@@ -1,0 +1,22 @@
+#!/bin/sh
+usage="$(cat<<EOF
+####################################################
+dev_iface=$(uci get innobank.basemaster.dev_iface)
+port=$(uci get innobank.basemaster.port)
+hostip=$(uci get innobank.basemaster.hostip)
+hostport=$(uci get innobank.basemaster.hostport)
+url=$(uci get innobank.basemaster.url)
+stat_api=$(uci get innobank.basemaster.stat_api)
+cellstat_api=$(uci get innobank.basemaster.cellstat_api)
+baseband_api=$(uci get innobank.basemaster.baseband_api)
+station_api=$(uci get innobank.basemaster.station_api)
+brand_api=$(uci get innobank.basemaster.brand_api)
+rem_result_api=$(uci get innobank.basemaster.rem_result_api)
+sendsta_itv='30'
+statitv='30'
+banditv='60'
+httptimeout='2'
+####################################################
+EOF
+)"
+echo "$usage" > /etc/base_master.cfg;

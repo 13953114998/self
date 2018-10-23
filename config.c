@@ -10,7 +10,7 @@
  *       Revision:  none
  *       Compiler:  gcc
  *
- *         Author:  yanfu cheng (Hand), hand0317_cyf@163.com
+ *         Author:  yanfu cheng (Hand), lambert2478@163.com
  *   Organization:  
  *
  * ============================================================================

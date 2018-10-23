@@ -1,0 +1,9 @@
+menu "base_master Features"
+	depends on PACKAGE_base_master
+config CLI_SUPORT
+	bool "Add CLI software to control"
+	default y
+config SYSX86
+	bool "base_master work in x86 device"
+	default y
+endmenu

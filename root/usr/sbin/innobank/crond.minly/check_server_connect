@@ -1,0 +1,24 @@
+#!/bin/sh
+
+net_check_count_file="/tmp/netsta_count"
+count_of_reboot=120
+
+net_status=$(uci get netstatus.internet.status)
+if [[ "$net_status" == "1" ]]; then
+	echo '0' > $net_check_count_file 
+	exit
+fi
+
+touch $net_check_count_file 
+
+net_check_count=$(cat $net_check_count_file)
+if [[ "$net_check_count" == "" ]]; then
+	net_check_count=0
+fi
+net_check_count=$(($net_check_count + 1))
+echo "$net_check_count" > $net_check_count_file 
+
+if [[ $net_check_count -gt $count_of_reboot ]]; then
+	reboot
+fi
+

@@ -1,0 +1,128 @@
+package "base_master"
+version "1.0.0"
+
+args "--conf-parser"
+option "config" 		f 	"config files" 			string	default="/etc/base_master.cfg" 		optional
+option "band_pa_state_config"   -   "同频异频配置数据库文件"   		string  default="/mnt/sd/band_pa_state.db"     	optional
+
+# pa company
+option "pa_cmp"                 -       "PA dev company 0-ShengH,1-LinE" int           default="0"                              optional
+option "bc_proto"               -       "Protocol of baicell 0-UDP,1-TCP" int          default="1"                              optional
+
+# TCP 
+option "host" 			- 	"TCP recv bind ip addr" 	string		default="127.0.0.1"			optional
+option "port"			- 	"TCP recv baicell bind port" 	int		default="3345"				optional
+option "fiber_port" 		- 	"TCP recv fiberhome bind port" 	int		default="4816"				optional
+option "wcdma_port" 		- 	"TCP recv wcdma port" 		int		default="5072"				optional
+# UDP 将接收到的数据使用UDP发送至本地端口
+option "uhost" 			- 	"UDP send dts host ip" 		string		default="127.0.0.1"			optional
+option "uport" 			- 	"UDP send dts port" 		int		default="3346"				optional
+
+option "uehost" 		- 	"UDP send UE info dts host ip" 	string		default="127.0.0.1"			optional
+option "ueport" 		- 	"UDP send UE info dts port" 	int		default="3355"				optional
+
+#band type
+option "band_typ" 		- 	"默认频段模式 1--同频 2--异频" 	int		default="1"				optional
+option "runinfo_file"           -       "主控板动态参数保存文件"        string          default="/etc/master_run"               optional
+
+# cache 
+option "gsm_cachefile" 		- 	"采集gsm数据缓存文件名"		string		default="/root/gsm_cache_file" 		optional
+option "cachefile" 	        - 	"采集数据缓存文件名"		string		default="/root/cache_file" 		optional
+option "max_filecache" 		- 	"缓存文件缓存条数(4/M)"		int		default="1600" 				optional
+
+# time (单位:秒(s))
+option "statitv" 		- 	"主控板状态发送间隔时间"	 int		default="120" 			optional
+option "banditv" 		- 	"基带板信息发送间隔时间"	 int		default="60" 			optional
+option "sendpa_itv" 		- 	"功放信息上报周期时间"		 int		default="1800" 			optional
+option "sendsta_itv" 		- 	"采集用户信息发送间隔时间"	 int		default="30" 			optional
+option "bandonline_itv" 	- 	"检测基带设备在线信息时间"	 int		default="120" 			optional
+option "max_stacache" 		- 	"采集用户信息最大占json条目数量" int		default="100" 			optional
+
+option "getcfgitv" 		- 	"get config itv" 		 int		default="300"			optional
+option "keepalive" 		k 	"keep alive" 			 int		default="10"			optional
+option "timererr" 		- 	"timer error timeout" 		 int 		default="10" 			optional
+option "baseband_itv" 		- 	"check baseband online status timeout" 	int 	default="600"			optional
+
+option "cutnet_mode" 		- 	"断网同异频模式 1：同频2：异频A3：异频B" int  	default="2" 			optional
+option "cutnet_power" 		- 	"发射功率(衰减值 0x00~0xff)" 		 int 	default="16" 			optional
+option "cutnet_rxgain" 		- 	"接收增益配置(0~127)" 			 int	default="20" 			optional
+
+# mqttc connect
+option "sensorname" 		- 	"sensor name " 			string 		default="sensor"		optional
+option "dev_iface" 		- 	"device iface for get mac" 	string 		default="eth0"			optional
+option "hostip" 		h 	"mqtt server ip address" 	string		default="192.168.10.133" 	optional
+option "hostport" 		p 	"mqtt server port" 		int		default="1883"			optional
+option "user_name" 		U 	"provide user name"		string		default="amywifi" 		optional
+option "user_passwd" 		P 	"provide user password"		string		default="123456.." 		optional
+
+option "udp_recv_gsm_port" 	g 	"udp连接gsm的 接收port" 	int		default="5557"			optional
+option "udp_gsm_ip" 		i 	"udp连接gsm的设备 ip" 		string		default="192.168.178.202"	optional
+option "udp_send_gsm_port" 	s 	"udp连接gsm的 发送port" 	int		default="5558"			optional
+
+# save recev information (IMSI ...) to sqlite
+option "baksqlname" 		- 	"保存数据的单一数据库名(含路径)" 	string		default="/mnt/sd/imsi_info/all.db" 	optional
+option "dbpath" 		- 	"保存数据的数据库所在位置(绝对路径)" 	string		default="/mnt/sd/imsi_info/" 		optional
+option "sqltablename" 		- 	"保存数据的数据表名称" 			string		default="imsi_info" 			optional
+option "sqltablename_gsm" 	- 	"保存GSM数据的数据表名称" 		string		default="gsm_imsi_info" 		optional
+option "bsavepath" 		- 	"保存基带板信息的路径"			string		default="/mnt/sd/base_band/" 		optional
+option "def_basepath"           -       "保存动态默认配置的路径"                string  	default="/mnt/sd/config/" 		optional
+option "log_dir" 	        -   	"操作日志保存路径" 	 		string    	default="/mnt/sd/log/"			optional
+
+#rec WIFI about
+option "wifi_port" 	- 	"接收wifi信息绑定的端口号" 	int   		default="5056" 			optional
+option "urlcli" 	- 	"发送周围无限设备信息 api" 	string  	default="wifi_client_save"	optional
+option "urlap" 		- 	"发送周围AP热点信息 api" 	string 		default="wifi_ap_save"		optional
+option "max_wificache" 	- 	"WIFI用户信息最大占json条目数量" int		default="100" 			optional
+
+# http send
+option "url" 			- 	"发送各信息的目标 url" 		string	multiple(1-)	default="http://192.168.10.133/index.php" 	optional
+option "stat_api" 		- 	"发送主控板信息 api" 		string		default="controller_save" 		optional
+option "cellstat_api" 		- 	"发送小区状态信息 api" 		string		default="work_admin_state_save" 	optional
+option "baseband_api" 		- 	"发送基站设备信息 api" 		string		default="basestation_save" 		optional
+option "station_api" 		- 	"发送用户信息 api" 		string		default="client_save" 			optional
+option "brand_api" 		- 	"发送频点设置参数信息 api" 	string		default="brand_save" 			optional
+option "rem_result_api" 	- 	"发送扫频信息 api" 		string		default="rem_result_save" 		optional
+option "sysarfcn_api" 		- 	"发送系统扫频信息 api" 		string		default="sys_arfcn_save" 		optional
+option "black_list_api" 	- 	"发送黑名单信息 api" 		string		default="black_list_save" 		optional
+option "tddsubframe_api" 	- 	"TDD子帧信息上报 api"		string		default="tdd_subframe_save" 		optional
+option "sync_api" 		- 	"发送同步信息 api" 		string		default="sync_save" 			optional
+option "redirect_api" 		- 	"发送重定向状态 api" 		string		default="redirect_save" 		optional
+option "uesend_api" 		- 	"发送UE状态 api" 		string		default="ue_save" 			optional
+option "warning_api" 		- 	"发送告警信息 api" 		string		default="device_alarm_save"		optional
+option "rx_power_api" 		- 	"发送增益与发射功率 api" 	string		default="rxgain_powerderease_save" 	optional
+option "rejectcause_api" 	- 	"位置区更新拒绝原因 api" 	string		default="tau_reject_cause_save" 	optional
+option "rrcconnum_api" 	 	- 	"随机接入成功率上报 api" 	string		default="rrc_connect_num_save" 		optional
+option "selfcfg_api" 	 	- 	"频点自配置后台频点上传 api" 	string		default="selfcfg_arfcn_save" 		optional
+option "post_gps_api" 		- 	"发送GPS经纬度高度 api" 	string		default="gpsinfo_save" 			optional
+option "gpsppsls_api" 	 	- 	"GPS偏移量查询 api" 		string		default="gps_ppsls_save" 		optional
+option "plmninfo_api" 	 	- 	"plmn辅频信息上传 api" 		string		default="plmninfo_save" 		optional
+option "painfo_api" 	 	- 	"功放信息上传 api" 		string		default="painfo_save" 			optional
+option "same_dif_fre_api"   	-   	"同频异频状态上传 api"   	string     	default="device_bandtype_save"      	optional
+option "wips_api"		- 	"get wips config api"		string		default="api/sensor_wips_config" 	optional
+option "generic_api" 		- 	"get generic config api"	string		default="api/sensor_config" 		optional
+option "httptimeout" 		- 	"http connection timeout" 	int		default="2" 				optional
+
+option "recev_type" 		r 	"recev_imsi_udp type 0 imsi, 1 wifi, 2 UE," 	int		default="0" 			optional
+
+# gsm http send api
+option "gsm_scan_api"          -   "扫描信息上报 api"   	 string    default="gsm_scan_save"       	optional
+option "gsm_fre_one_api"       -   "频点1信息上报 api"  	 string    default="gsm_fre_one_save"       	optional
+option "gsm_fre_two_api"       -   "频点1信息上报 api"   	 string    default="gsm_fre_two_save"       	optional
+option "gsm_fre_offset_api"    -   "频率偏移信息上报 api"   	 string    default="gsm_fre_offset_save"       	optional
+option "gsm_ind_api"           -   "循环上报基础信息 api"   	 string    default="gsm_ind_save"       	optional
+option "gsm_cdma_rep_api"      -   "GSM与CDMA用户信息上报 api"   string    default="gsm_cdma_rep_save"  	optional
+option "gsm_cfgMode_rep_api"   -   "GSM配置模式信息上报 api"     string    default="gsm_cfgMode_rep_save"       optional
+option "gsm_captime_api"       -   "GSM重新捕获间隔时间上报 api" string    default="gsm_captime_save"       	optional
+
+# wcdma http send api
+option "wcdma_dev_info_api"    -   "设备运行参数信息上报 api"  	string    default="wcdma_dev_info_save"       	optional
+option "wcdma_dac_info_api"    -   "dac信息上报 api"   	        string    default="wcdma_dac_info_save"       	optional
+
+option "flow_api"              -   "流量信息上报 api"           string    default="controller_flow_save"       	optional
+
+option "cut_network_api"       -   "断网配置信息上报 api"       string    default="controller_network_save"     optional
+
+# other
+option "curldebug" 		- 	"curl debug" 			flag		off
+option "debug"  		d 	"debug" 			int		default="1" 		optional
+

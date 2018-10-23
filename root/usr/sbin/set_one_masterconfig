@@ -1,0 +1,17 @@
+#!/bin/sh
+
+if [[ "$1" == "hostip" ]]; then
+	if [[ "$2" == "" ]]; then
+		echo "no host ip input!"
+	else
+		uci set innobank.basemaster.hostip="$2" 
+		uci commit innobank
+	fi
+elif [[ "$1" == "url" ]]; then
+	if [[ "$2" == "" ]]; then
+		echo "no url input!"
+	else
+		uci set innobank.basemaster.url="$2" 
+		uci commit innobank
+	fi
+fi
